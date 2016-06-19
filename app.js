@@ -14,12 +14,14 @@
 const express = require('express');
 const aws = require('aws-sdk');
 
+
 /*
  * Set-up and run the Express app.
  */
 const app = express();
 app.set('views', './views');
-app.use(express.static('./public'));
+app.use(express.static('./public'));// load aws config
+aws.config.loadFromPath('config.json');
 app.engine('html', require('ejs').renderFile);
 app.listen(process.env.PORT || 3000);
 
@@ -53,7 +55,9 @@ app.get('/sign-s3', (req, res) => {
 
   s3.getSignedUrl('putObject', s3Params, (err, data) => {
     if(err){
+      console.log("Before Error");
       console.log(err);
+      console.log("After Error");
       return res.end();
     }
     const returnData = {
@@ -72,4 +76,7 @@ app.get('/sign-s3', (req, res) => {
  */
 app.post('/save-details', (req, res) => {
   // TODO: Read POSTed form data and do something useful
+
+     console.log("Post form coming");
+
 });
