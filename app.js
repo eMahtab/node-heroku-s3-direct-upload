@@ -28,7 +28,9 @@ app.listen(process.env.PORT || 3000);
 /*
  * Load the S3 information from the environment variables.
  */
-const S3_BUCKET = process.env.S3_BUCKET;
+//const S3_BUCKET = process.env.S3_BUCKET;
+
+ const S3_BUCKET = s3freebucket;
 
 /*
  * Respond to GET requests to /account.
